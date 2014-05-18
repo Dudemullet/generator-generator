@@ -27,7 +27,8 @@
     "github": "~0.1.8",
     "chalk": "~0.4.0",
     "npm-name": "~0.1.0",
-    "yosay": "^0.1.0"
+    "yosay": "^0.1.0",
+    "json-file-plus": "~0.2.3"
   },
   "devDependencies": {
     "mocha": "*"
