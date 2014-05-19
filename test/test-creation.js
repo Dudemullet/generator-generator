@@ -3,7 +3,7 @@
 
 var path = require('path');
 var helpers = require('yeoman-generator').test;
-
+var fs = require('fs');
 
 describe('Generator generator', function () {
   beforeEach(function (done) {
@@ -61,6 +61,13 @@ describe('Subgenerator subgenerator', function () {
         return done(err);
       }
 
+      var mockPkgData = {files:[]};
+      fs.writeFile('package.json', JSON.stringify(mockPkgData), function (err) {
+        if (err) {
+          return done(err);
+        }
+      })
+
       this.app = helpers.createGenerator('generator:subgenerator', [
         '../../subgenerator'
       ], ['foo']);
@@ -76,6 +83,8 @@ describe('Subgenerator subgenerator', function () {
 
     this.app.run({}, function () {
       helpers.assertFile(expected);
+      helpers.assertFileContent('package.json',  /"files"/);
+      helpers.assertFileContent('package.json',  /"foo"/);
       done();
     });
   });
